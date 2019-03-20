@@ -1,6 +1,5 @@
 package application;
 	
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,8 +8,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -20,8 +28,13 @@ public class Main extends Application {
 	
 	public void start(Stage primaryStage) {
 		try {
-            primaryStage.setTitle("Menu Principal");
-            Label labelTitle = new Label("Bienvenido");
+            primaryStage.setTitle("Menu Principal");      
+            Pane root = new Pane();
+            Scene scene = new Scene(root,600,200);
+            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            primaryStage.setScene(scene);
+            
+            Label labelTitle = new Label("Bienvedfasfasdfasdfasdfasdfasdfadsfdsafdsafdsfnido");
             labelTitle.relocate(20, 10);
             Button btnRegistro = new Button();
             btnRegistro.setText("Registrar Paciente");
@@ -72,17 +85,24 @@ public class Main extends Application {
                     garanteWindow();
                 }
             });
+            TextArea textArea = TextAreaBuilder.create().prefWidth(400).wrapText(true).build();
+             
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setContent(textArea);
+            scrollPane.setFitToWidth(true);
+            scrollPane.setPrefWidth(400);
+            scrollPane.setPrefHeight(180);
+            scrollPane.relocate(150, 20);
+            textArea.setEditable(false);
             
-            Pane root = new Pane();
+            root.getChildren().add(scrollPane);
+
             root.getChildren().add(btnRegistro);
             root.getChildren().add(btnConsulta);
             root.getChildren().add(btnEmergencia);
             root.getChildren().add(btnPersonal);
             root.getChildren().add(btgarante);
             root.getChildren().add(labelTitle);
-            Scene scene = new Scene(root,250,200);
-            scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-            primaryStage.setScene(scene);
             primaryStage.show();
 			
 		} catch(Exception e) {
